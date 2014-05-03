@@ -1,0 +1,17 @@
+.col {
+	width: 35px;
+	height: 35px;
+	margin: 5px;
+	float: left;
+	background: red;
+	opacity: 0.3;
+	transition: all ease-in-out 0.2s;
+}
+
+.col.active {
+	opacity: 1;
+}
+
+.row {
+	overflow: hidden;
+}
