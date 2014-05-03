@@ -30,49 +30,37 @@ var SoundMatrixUi = (function () {
 		audioContext: new AudioContext(),
 		/**
 		 * Initializer
+		 * @param {Array} source
 		 * @returns {undefined}
 		 */
-		init: function () {
-			this.loadSounds();
+		init: function (source) {
+			this.loadSounds(source);
 		},
 		/**
 		 * Loads sounds
+		 * @param {Array} source
 		 * @returns {undefined}
 		 */
-		loadSounds: function () {
+		loadSounds: function (source) {
 			var _this = this,
-				bufferLoader = new BufferLoader (
-					this.audioContext,
-					[
-						'src/assets/sounds/232002__danmitch3ll__xylophone-c.wav',
-						'src/assets/sounds/232008__danmitch3ll__xylophone-d1.wav',
-						'src/assets/sounds/232007__danmitch3ll__xylophone-e1.wav',
-						'src/assets/sounds/232006__danmitch3ll__xylophone-f.wav',
-						'src/assets/sounds/232005__danmitch3ll__xylophone-g.wav',
-						'src/assets/sounds/232004__danmitch3ll__xylophone-a.wav',
-						'src/assets/sounds/232003__danmitch3ll__xylophone-b.wav',
-						'src/assets/sounds/232001__danmitch3ll__xylophone-c2.wav',
-					],
-					// success callback
-					function (bufferList) {
-						// iterate over buffer list
-						bufferList.forEach(function (audioBuffer) {
-							// push new sound row and create columns
-							_this.sounds.push(function () {
-								var columns = [],
-									i;
-								
-								for (i = 0; i < _this.columns; ++i) {
-									columns.push(new Sound(_this.audioContext, audioBuffer));
-								}
-								
-								return columns;
-							}());
-						});
-						
-						_this.loadApp();
-					}
-				);
+				bufferLoader = new BufferLoader (this.audioContext, source, function (bufferList) {
+					// iterate over buffer list
+					bufferList.forEach(function (audioBuffer) {
+						// push new sound row and create columns
+						_this.sounds.push(function () {
+							var columns = [],
+								i;
+
+							for (i = 0; i < _this.columns; ++i) {
+								columns.push(new Sound(_this.audioContext, audioBuffer));
+							}
+
+							return columns;
+						}());
+					});
+
+					_this.loadApp();
+				});
 
 			bufferLoader.load();
 		},
