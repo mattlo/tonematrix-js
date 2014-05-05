@@ -1,2 +1,2 @@
 # Tone Matrix
-Xylophone sounds over a beat
+Random repository of sounds on a sound matrix.
