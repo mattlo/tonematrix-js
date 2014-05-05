@@ -71,6 +71,9 @@ var SoundMatrixUi = (function () {
 		loadApp: function () {
 			var _this = this;
 			
+			// clear loading text
+			this.container.innerHTML = '';
+			
 			this.sounds.forEach(function (row, rowIndex) {
 				var div = _this.renderRow();
 				

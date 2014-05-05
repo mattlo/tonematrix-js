@@ -15,3 +15,12 @@
 .row {
 	overflow: hidden;
 }
+
+h1 {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.matrix {
+	margin: 20px 0;
+}
